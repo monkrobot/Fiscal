@@ -16,5 +16,4 @@ if __name__ == "__main__":
     start = time()
     for i in range(1):
         cashbox_post()
-    print(cashbox_post())
     print(time() - start)
