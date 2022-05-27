@@ -1,2 +1,4 @@
 fiscal/settings.py
 /env
+__pycache__/
+.idea

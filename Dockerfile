@@ -2,8 +2,10 @@ FROM python:3.8-slim-buster
 
 RUN mkdir -p /code
 COPY requirements.txt /tmp/requirements.txt
-RUN cd /code && python -m venv env && source env/bin/activate \
-    && pip install -r /tmp/requirements.txt --no-cache-dir
+RUN cd /code
 COPY fiscal /code/fiscal
 WORKDIR /code
-CMD ["/bin/bash", "-c", "source env/bin/activate && python -m uvicorn fiscal.app:app"]
+
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install -r /tmp/requirements.txt --no-cache-dir
+CMD python3 -m uvicorn --host 0.0.0.0 fiscal.app:app

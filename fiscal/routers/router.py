@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from typing import Union
 
 from fiscal.crud import crud
 from fiscal.schemas import schema
@@ -29,7 +30,7 @@ async def get_cashbox(data: schema.Cashbox, db: Session = Depends(get_db)):
     return cashbox
 
 
-@router.post("/trip", response_model=schema.Trip)
+@router.post("/trip", response_model=Union[schema.Trip, schema.Resonse])
 async def post_trip(data: schema.Trip, db: Session = Depends(get_db)):
-    b = await crud.post_trip(db, data)
-    return b
+    trip = await crud.post_trip(db, data)
+    return trip

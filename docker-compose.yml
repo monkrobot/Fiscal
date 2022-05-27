@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+
+  db:
+    image: postgres:13
+    env_file:
+      - vars.env
+    ports:
+      - "5430:5432"
+
+  web_server:
+    image: python:3.8-slim-buster
+    ports:
+      - "8000:8000"
+    build:
+      dockerfile: Dockerfile
+      context: .
+    command:
+        bash -c 'python3 -m uvicorn fiscal.app:app'
+    restart: on-failure
+    depends_on:
+      - db

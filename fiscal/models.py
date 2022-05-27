@@ -1,7 +1,4 @@
-from datetime import datetime
-from sqlalchemy import (Boolean, Column, ForeignKey, Integer,
-                        DateTime)
-from sqlalchemy.orm import relationship
+from sqlalchemy import (Column, ForeignKey, Integer, DateTime)
 
 from fiscal.db import Base
 
@@ -24,5 +21,3 @@ class Trip(Base):
     kpp = Column(Integer)
     price = Column(Integer)
     cashbox_id = Column(Integer, ForeignKey("cashboxes.id"))
-    
-    #cashbox = relationship("Cashbox", back_populates="trips")

@@ -19,12 +19,7 @@ class Trip(BaseModel):
 
     class Config:
         orm_mode = True
-#Информацию о кассах с атрибутами:
-#ИНН клиента
-#КПП клиента
-#Рег№ кассы
-#Данные о поездках:
-#Дата/время
-#ИНН
-#КПП
-#Стоимость поездки
+
+
+class Resonse(BaseModel):
+    msg: str

@@ -8,8 +8,6 @@ from fiscal import models
 
 
 async def post_cashbox(db: Session, data: schema.Cashbox):
-    #new_cashbox = models.Cashbox(inn=data.inn, kpp=data.kpp,
-    #                             registration_num=data.registration_num)
     new_cashbox = models.Cashbox(
         inn=data.inn,
         kpp=data.kpp,
@@ -36,9 +34,10 @@ async def post_trip(db: Session, data: schema.Trip):
              models.Cashbox.kpp == data.kpp)
     cashbox_id = db.execute(
                 select(models.Cashbox.id).where(query))
-    #cashbox_id = cashbox_id.scalars().first()
+    cashbox_id = cashbox_id.scalars().first()
     if not cashbox_id:
-        return "There is no such cashbox"
+        return {"msg": f"There is no such cashbox inn: {data.inn}, " \
+                       f"kpp: {data.kpp}"}
     new_trip = models.Trip(
         datetime=data.datetime,
         inn=data.inn,
